@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_firebase_login/theme.dart';
 import 'package:flutter_firebase_login/app/app.dart';
-import 'package:flutter_firebase_login/theme.dart';
 
 
 class App extends StatelessWidget {
@@ -22,8 +21,7 @@ class App extends StatelessWidget {
         child: BlocProvider(
           lazy: false,
             create: (_) => AppBloc(
-                authenticationRepository: _authenticationRepository)
-                .add(const AppUserSubscriptionRequested()),
+                authenticationRepository: _authenticationRepository)..add(const AppUserSubscriptionRequested()),
             child: const AppView(),
         ),
     );
@@ -40,6 +38,6 @@ class AppView extends StatelessWidget {
       home: FlowBuilder(
         state: context.select((AppBloc bloc) => bloc.state.status),
         onGeneratePages: onGenerateAppViewPages,
-    );
+    ));
   }
 }

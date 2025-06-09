@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_firebase_login/app/bloc/app_bloc.dart';
-import 'package:flutter_firebase_login/login/bloc/login_page.dart';
+import 'package:flutter_firebase_login/login/view/login_page.dart';
 
 import '../../home/view/home_page.dart';
 

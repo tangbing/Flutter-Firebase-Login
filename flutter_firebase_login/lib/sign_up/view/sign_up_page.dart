@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_firebase_login/sign_up/view/sign_up_form.dart';
+
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
