@@ -1,11 +1,7 @@
 
-
-
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
-
+import 'package:bloc/bloc.dart';
 part 'app_event.dart';
 part 'app_state.dart';
 
@@ -23,15 +19,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       AppUserSubscriptionRequested event,
       Emitter<AppState> emit
       ) async {
-
     return emit.onEach(_authenticationRepository.user,
         onData: (user) => emit(AppState(user: user)),
-       onError: (error, stackTrace) => ,
+       onError: (error, stackTrace) => emit(AppState()),
     );
-
-
   }
-
 
   Future<void> _onLogoutPressed(
       AppLogoutPressed event,
