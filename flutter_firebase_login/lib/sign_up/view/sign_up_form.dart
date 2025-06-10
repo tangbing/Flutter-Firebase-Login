@@ -10,16 +10,35 @@ class SignUpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _EmailInput(),
-        const SizedBox(height: 8),
-        _PasswordInput(),
-        const SizedBox(height: 8),
-        _ConfirmPasswordInput(),
-        const SizedBox(height: 8),
-        _SignUpButton(),
-      ],
+    return BlocListener<SignUpCubit, SignUpState>(
+      listener: (BuildContext context, SignUpState state) {
+        if (state.status.isSuccess) {
+          Navigator.of(context).pop();
+        } else if (state.status.isFailure) {
+          ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(content: Text(state.errorMessage ?? 'Sign Up Failure')),
+              );
+        }
+    },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Align(
+          alignment: const Alignment(0, -1 /3),
+          child: Column(
+            children: [
+              _EmailInput(),
+              const SizedBox(height: 8),
+              _PasswordInput(),
+              const SizedBox(height: 8),
+              _ConfirmPasswordInput(),
+              const SizedBox(height: 8),
+              _SignUpButton(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -55,7 +74,7 @@ class _PasswordInput extends StatelessWidget {
     return TextField(
       key: const Key('signUpForm_passwordInput_textField'),
       onChanged: (password) => context.read<SignUpCubit>().passwordChanged(password),
-      obscureText: true,
+      //obscureText: true,
       decoration: InputDecoration(
         labelText: 'password',
         helperText: '',
@@ -75,7 +94,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
     return TextField(
       key: const Key('signUpForm_confirmedPasswordInput_textField'),
       onChanged: (confirmedPassword) => context.read<SignUpCubit>().confirmedPasswordChanged(confirmedPassword),
-      obscureText: true,
+      //obscureText: true,
       decoration: InputDecoration(
         labelText: 'confirm password',
         helperText: '',
@@ -96,6 +115,8 @@ class _SignUpButton extends StatelessWidget {
     if (isInProgress) return const CircularProgressIndicator();
 
     final isValid = context.select((SignUpCubit cubit) => cubit.state.isValid);
+
+    debugPrint('isValid: $isValid');
 
     return ElevatedButton(
       key: const Key('signUpForm_continue_raisedButton'),
