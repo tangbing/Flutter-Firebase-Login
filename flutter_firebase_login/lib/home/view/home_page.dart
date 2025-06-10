@@ -25,14 +25,17 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          Avatar(photo: user.photo),
-          const SizedBox(height: 4),
-          Text(user.email ?? '', style: textTheme.titleLarge),
-          const SizedBox(height: 4),
-          Text(user.name ?? '', style: textTheme.headlineSmall),
-        ],
+      body: Center(
+        child: Column(
+           mainAxisSize: MainAxisSize.min,
+          children: [
+            Avatar(photo: user.photo),
+            const SizedBox(height: 4),
+            Text(user.email ?? '', style: textTheme.titleLarge),
+            const SizedBox(height: 4),
+            Text(user.name ?? '', style: textTheme.headlineSmall),
+          ],
+        ),
       ),
     );
   }

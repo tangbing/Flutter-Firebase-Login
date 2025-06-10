@@ -21,7 +21,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       ) async {
     return emit.onEach(_authenticationRepository.user,
         onData: (user) => emit(AppState(user: user)),
-       onError: (error, stackTrace) => emit(AppState()),
+        onError: (error, stackTrace) => emit(AppState()),
     );
   }
 

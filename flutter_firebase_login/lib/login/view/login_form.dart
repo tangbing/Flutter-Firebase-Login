@@ -76,7 +76,7 @@ class _PasswordInput extends StatelessWidget {
     final displayError = context.select((LoginCubit cubit) => cubit.state.password.displayError);
     return TextFormField(
       key: const Key('loginForm_passwordInput_textField'),
-      onChanged: (email) => context.read<LoginCubit>().passwordChanged(email),
+      onChanged: (password) => context.read<LoginCubit>().passwordChanged(password),
       obscureText: true,
       decoration: InputDecoration(
         labelText: 'password',
@@ -108,9 +108,10 @@ class _LoginButton extends StatelessWidget {
           ),
           backgroundColor: const Color(0xFFFFD600),
         ),
-        onPressed: isValid
-        ? () => context.read<LoginCubit>()
-        : null,
+        onPressed: () {
+          print('login clicked!');
+          context.read<LoginCubit>().loginWithCredentials();
+        },
         child: Text('LOGIN'));
   }
 }
@@ -129,7 +130,7 @@ class _GoogleLoginButton extends StatelessWidget {
         ),
         backgroundColor: theme.colorScheme.secondary,
       ),
-      onPressed: () => context.read<LoginCubit>(),
+      onPressed: () => context.read<LoginCubit>().loginWithGoogle(),
         icon: const Icon(FontAwesomeIcons.google, color: Colors.white),
         label: const Text(
           'SIGN IN WITH GOOGLE',

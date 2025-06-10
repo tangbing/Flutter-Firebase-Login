@@ -14,7 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
   
   void emailChanged(String email) => emit(state.withEmail(email));
 
-  void passwordChanged(String password) => emit(state);
+  void passwordChanged(String password) => emit(state.withPassword(password));
 
 
   Future<void> loginWithCredentials() async {
@@ -26,6 +26,7 @@ class LoginCubit extends Cubit<LoginState> {
           email: state.email.value,
           password: state.password.value
       );
+      emit(state.withSubmissionSuccess());
     } on LogInWithEmailAndPasswordFailure catch (e) {
       emit(state.withSubmissionFailure(e.message));
     } catch (_) {

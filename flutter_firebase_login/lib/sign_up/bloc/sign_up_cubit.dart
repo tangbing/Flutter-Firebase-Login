@@ -5,6 +5,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 
@@ -34,6 +35,7 @@ class SignUpCubit extends Cubit<SignUpState> {
      );
    } on SignUpWithEmailAndPasswordFailure catch (e) {
      emit(state.withSubmissionFailure(e.message));
+     debugPrint('error msg: ${e.message}');
    } catch (_) {
      emit(state.withSubmissionFailure());
    }
