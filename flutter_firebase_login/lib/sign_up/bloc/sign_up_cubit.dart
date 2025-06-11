@@ -33,6 +33,7 @@ class SignUpCubit extends Cubit<SignUpState> {
          email: state.email.value,
          password: state.password.value
      );
+     emit(state.withSubmissionSuccess());
    } on SignUpWithEmailAndPasswordFailure catch (e) {
      emit(state.withSubmissionFailure(e.message));
      debugPrint('error msg: ${e.message}');

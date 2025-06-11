@@ -4,6 +4,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_firebase_login/login/bloc/login_cubit.dart';
+import 'package:formz/formz.dart';
 
 import 'login_form.dart';
 
@@ -22,7 +23,14 @@ class LoginPage extends StatelessWidget {
       body: Padding(padding: EdgeInsets.all(8),
         child: BlocProvider(
             create: (context) => LoginCubit(context.read<AuthenticationRepository>()),
-            child: const LoginForm(),
+            child: BlocListener<LoginCubit, LoginState>(
+
+                listener: (BuildContext context, state) {
+                  if (state.status.isSuccess) {
+                    Navigator.of(context).pushReplacementNamed('/home');
+                  }
+                },
+                child: const LoginForm()),
         ),
       ),
     );
