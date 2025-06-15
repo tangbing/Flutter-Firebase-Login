@@ -24,10 +24,9 @@ class LoginPage extends StatelessWidget {
         child: BlocProvider(
             create: (context) => LoginCubit(context.read<AuthenticationRepository>()),
             child: BlocListener<LoginCubit, LoginState>(
-
                 listener: (BuildContext context, state) {
                   if (state.status.isSuccess) {
-                    Navigator.of(context).pushReplacementNamed('/home');
+                    print('listener!-----');
                   }
                 },
                 child: const LoginForm()),

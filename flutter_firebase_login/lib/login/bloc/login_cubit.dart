@@ -35,6 +35,7 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> loginWithGoogle() async {
+    print('loginWithGoogle!!!');
     emit(state.withSubmissionInProgress());
     try {
       await _authenticationRepository.loginWithGoogle();
